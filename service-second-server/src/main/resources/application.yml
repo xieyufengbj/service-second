@@ -1,0 +1,54 @@
+#注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/
+  instance:
+    lease-expiration-duration-in-seconds: 30
+    lease-renewal-interval-in-seconds: 10
+    prefer-ip-address: true
+# logback
+logging:
+  config: classpath:logback.xml
+  level:
+    root: info
+
+# redis
+spring:
+  application:
+    name: service-second
+  profiles:
+    active: dev
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
+#    password: 123456
+#    timeout: 1000ms
+#    database: 0
+#    jedis:
+#      pool:
+#        max-active: 10
+#        max-idle: 8
+#        min-idle: 2
+#        max-wait: -1ms
+server:
+  port: 8080
+
+mybatis:
+  config-location: classpath:META-INF/mybatis-config.xml
+  mapper-locations: com.example.domain.**.mappers
+  #配置映射类所在都包名
+  type-aliases-package: com.example.domain.**.repository
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#线程池配置
+async:
+  executor:
+    core_pool_size: 10
+    max_pool_size: 20
+    queue_capacity: 200
+    prefix: async-executor-
+    keep_alive_seconds: 60
+    await_termination_seconds: 60
+
