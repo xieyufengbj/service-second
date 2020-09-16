@@ -17,8 +17,8 @@ import javax.sql.DataSource;
  * @date: 2020/8/27 08:40
  * @description:
  */
-@Configuration
-@EnableTransactionManagement
+//@Configuration
+//@EnableTransactionManagement
 public class ShardingSphereTransactionConfiguration {
 
     /**

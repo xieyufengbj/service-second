@@ -1,9 +1,6 @@
 package com.example;
 
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
-import com.example.infrastructure.util.shardingsphere.config.ShardingSphereTransactionConfiguration;
 import org.mybatis.spring.annotation.MapperScan;
-import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.transaction.jta.JtaAutoConfiguration;
@@ -11,7 +8,6 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.Import;
 
 import java.sql.SQLException;
 
@@ -26,8 +22,8 @@ import java.sql.SQLException;
 //@EnableFeignClients
 @EnableEurekaClient
 @EnableAspectJAutoProxy
-@Import(ShardingSphereTransactionConfiguration.class)
-@SpringBootApplication(exclude= {JtaAutoConfiguration.class, DruidDataSourceAutoConfigure.class, MybatisAutoConfiguration.class})
+@ComponentScan(basePackages = {"com.example.domain.shardingsphere.repository"})
+@SpringBootApplication(exclude= {JtaAutoConfiguration.class})
 public class ApplicationStarter {
 
     /**
