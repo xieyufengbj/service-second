@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
- * Copyright (C), 2020, 上海昌投网络科技有限公司
+ * Copyright (C), 2020
  * FileName: ParamConfigService
  *
  * @author: yufeng

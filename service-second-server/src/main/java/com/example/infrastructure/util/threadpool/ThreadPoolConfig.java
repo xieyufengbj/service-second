@@ -11,7 +11,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * Copyright (C), 2020, 上海昌投网络科技有限公司
+ * Copyright (C), 2020
  * FileName: ThreadPoolConfig
  *
  * @author: yufeng

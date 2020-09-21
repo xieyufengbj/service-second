@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.Resource;
 
 /**
- * Copyright (C), 2020, 上海昌投网络科技有限公司
+ * Copyright (C), 2020
  * FileName: ConsumerConfig
  *
  * @author: yufeng
