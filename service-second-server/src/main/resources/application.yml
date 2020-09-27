@@ -12,6 +12,7 @@ spring:
     active: dev
   main:
     allow-bean-definition-overriding: false
+
 #  redis:
 #    host: 127.0.0.1
 #    port: 6379
@@ -28,13 +29,13 @@ server:
   port: 8080
 
 mybatis:
-  config-location: classpath:META-INF/mybatis-config.xml
+#  config-location: classpath:META-INF/mybatis-config.xml
   mapper-locations: com.example.domain.**.mappers
   #配置映射类所在都包名
   type-aliases-package: com.example.domain
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-#    map-underscore-to-camel-case: true
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
 
 #线程池配置
 async:

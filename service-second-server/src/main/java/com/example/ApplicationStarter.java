@@ -24,7 +24,7 @@ import java.sql.SQLException;
 @EnableEurekaClient
 @EnableAspectJAutoProxy
 @ComponentScan(basePackages = {"com.example.domain.shardingsphere.repository"})
-@SpringBootApplication(exclude= {JtaAutoConfiguration.class, DataSourceAutoConfiguration.class})
+@SpringBootApplication(exclude= {DataSourceAutoConfiguration.class, JtaAutoConfiguration.class})
 public class ApplicationStarter {
 
     /**
@@ -33,11 +33,5 @@ public class ApplicationStarter {
      */
     public static void main(String[] args) throws SQLException {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(ApplicationStarter.class, args);
-
-        String[] beans = applicationContext.getBeanDefinitionNames();
-        for (String name : beans) {
-            System.out.println("++++++" + name);
-        }
-//        ExampleExecuteTemplate.run(applicationContext.getBean(ExampleService.class));
     }
 }

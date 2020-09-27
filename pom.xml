@@ -73,6 +73,11 @@
                 <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
                 <version>${shardingsphere.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-namespace</artifactId>
+                <version>${shardingsphere.version}</version>
+            </dependency>
             <!-- 使用 XA 事务时，需要引入此模块 -->
             <dependency>
                 <groupId>org.apache.shardingsphere</groupId>
@@ -85,11 +90,11 @@
                 <artifactId>sharding-transaction-base-seata-at</artifactId>
                 <version>${shardingsphere.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-jdbc</artifactId>
-                <version>2.3.3.RELEASE</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-starter-jdbc</artifactId>-->
+                <!--<version>2.3.3.RELEASE</version>-->
+            <!--</dependency>-->
             <!--mybatis依赖-->
             <dependency>
                 <groupId>org.mybatis</groupId>
@@ -109,7 +114,7 @@
             <!--添加druid依赖-->
             <dependency>
                 <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
+                <artifactId>druid</artifactId>
                 <version>1.1.23</version>
             </dependency>
             <!--apollo配置中心-->
@@ -127,6 +132,11 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>2.3.3.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
                 <version>2.3.3.RELEASE</version>
             </dependency>
             <!--消息队列-->
@@ -194,9 +204,9 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>

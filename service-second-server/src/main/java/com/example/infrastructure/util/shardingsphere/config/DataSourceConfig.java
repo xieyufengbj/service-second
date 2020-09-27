@@ -1,12 +1,15 @@
 package com.example.infrastructure.util.shardingsphere.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.example.infrastructure.util.shardingsphere.algorithm.UserShardingAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.shardingsphere.api.config.masterslave.LoadBalanceStrategyConfiguration;
 import org.apache.shardingsphere.api.config.masterslave.MasterSlaveRuleConfiguration;
+import org.apache.shardingsphere.api.config.sharding.KeyGeneratorConfiguration;
 import org.apache.shardingsphere.api.config.sharding.ShardingRuleConfiguration;
 import org.apache.shardingsphere.api.config.sharding.TableRuleConfiguration;
+import org.apache.shardingsphere.api.config.sharding.strategy.StandardShardingStrategyConfiguration;
 import org.apache.shardingsphere.shardingjdbc.api.ShardingDataSourceFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -131,16 +134,22 @@ public class DataSourceConfig {
         ShardingRuleConfiguration shardingRuleConfiguration = new ShardingRuleConfiguration();
         shardingRuleConfiguration.getMasterSlaveRuleConfigs().add(masterSlaveRuleConfiguration0);
         shardingRuleConfiguration.getMasterSlaveRuleConfigs().add(masterSlaveRuleConfiguration1);
-
         shardingRuleConfiguration.getTableRuleConfigs().add(tableRuleConfiguration());
-
+        // 创建数据源
         DataSource dataSource = ShardingDataSourceFactory.createDataSource(dataSourceMap, shardingRuleConfiguration, properties);
         return dataSource;
     }
 
+    // 分库分表规则设置
     TableRuleConfiguration tableRuleConfiguration() {
-        TableRuleConfiguration tableRuleConfiguration = new TableRuleConfiguration("", "");
-
+        // 配置 t_user表规则
+        TableRuleConfiguration tableRuleConfiguration = new TableRuleConfiguration("t_user", "master$->{0..1}.t_user$->{0..1}");
+        // 配置分库规则
+        tableRuleConfiguration.setDatabaseShardingStrategyConfig(new StandardShardingStrategyConfiguration("group_id", UserShardingAlgorithm.databaseShardingAlgorithm));
+        // 配置分表规则
+        tableRuleConfiguration.setTableShardingStrategyConfig(new StandardShardingStrategyConfiguration("user_id", UserShardingAlgorithm.tableShardingAlgorithm));
+        // 分布式主键
+        tableRuleConfiguration.setKeyGeneratorConfig(new KeyGeneratorConfiguration("SNOWFLAKE", "id"));
         return tableRuleConfiguration;
     }
 
