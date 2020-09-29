@@ -1,13 +1,12 @@
 package com.example;
 
-import org.mybatis.spring.annotation.MapperScan;
+import com.example.domain.shardingsphere.service.OrderServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.transaction.jta.JtaAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import java.sql.SQLException;
@@ -23,7 +22,6 @@ import java.sql.SQLException;
 //@EnableFeignClients
 @EnableEurekaClient
 @EnableAspectJAutoProxy
-@ComponentScan(basePackages = {"com.example.domain.shardingsphere.repository"})
 @SpringBootApplication(exclude= {DataSourceAutoConfiguration.class, JtaAutoConfiguration.class})
 public class ApplicationStarter {
 
@@ -33,5 +31,15 @@ public class ApplicationStarter {
      */
     public static void main(String[] args) throws SQLException {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(ApplicationStarter.class, args);
+        OrderServiceImpl exampleService = applicationContext.getBean(OrderServiceImpl.class);
+
+        try {
+            exampleService.initEnvironment();
+            exampleService.processSuccess();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            exampleService.cleanEnvironment();
+        }
     }
 }
